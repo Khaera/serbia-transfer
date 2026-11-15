@@ -32,16 +32,28 @@
 
         const entryDate = new Date(entryYear, entryMonth - 1, entryDay);
         
-        // Крайний срок — ровно 30 дней после въезда
+        // Рассчитываем дату выезда
         const deadlineDate = new Date(entryDate);
         deadlineDate.setDate(entryDate.getDate() + 30);
 
+        // Получаем сегодняшнюю дату
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        deadlineDate.setHours(0, 0, 0, 0);
+
+        // Подготавливаем обе даты для сравнения
+        const todayTimestamp = Date.UTC(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate()
+        );
+
+        const deadlineTimestamp = Date.UTC(
+            deadlineDate.getFullYear(),
+            deadlineDate.getMonth(),
+            deadlineDate.getDate()
+        );
 
         // Разница в полных днях
-        const diffTime = deadlineDate - today;
+        const diffTime = deadlineTimestamp - todayTimestamp;
         const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
         // Форматируем дату дедлайна для красоты
