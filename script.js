@@ -38,45 +38,24 @@ function getDeadlineDate(entryDate) {
     return deadlineDate;
 }
 
-function calculateDays(dateString) {
-    if (!dateString) {
-        calcResult.classList.add('hidden');
-        return;
-    }
+//возвращает метку полуночи UTC в миллисекундах
+function getCalendarTimestamp(date) {
+    return Date.UTC(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+    )
+};
 
-    const entryDate = parseEntryDate(dateString);
-
-    // Рассчитываем дату выезда
-    const deadlineDate = getDeadlineDate(entryDate);
-
-    // Получаем сегодняшнюю дату
-    const today = new Date();
-
-    //Создаем функцию которая возвращает метку полуночи UTC в миллисекундах
-    function getCalendarTimestamp(date) {
-        return Date.UTC(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate()
-        )
-    };
-
-    // Подготавливаем обе даты для сравнения
-    const todayTimestamp = getCalendarTimestamp(today);
-
-    const deadlineTimestamp = getCalendarTimestamp(deadlineDate);
-
-    // Разница в полных днях
-    const diffTime = deadlineTimestamp - todayTimestamp;
-    const diffDays = Math.round(diffTime / MILLISECONDS_PER_DAY);
-
-    // Форматируем дату дедлайна для красоты
+// Форматируем дату дедлайна для красоты
+function renderDeadlineDate(deadlineDate) {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDeadline = deadlineDate.toLocaleDateString('ru-RU', options);
 
     deadlineDateEl.textContent = formattedDeadline;
+}
 
-    // Текст для оставшихся дней
+function renderDaysLeft(diffDays) {
     if (diffDays > 0) {
         daysLeftEl.textContent = `${diffDays} дн.`;
     } else if (diffDays === 0) {
@@ -84,8 +63,9 @@ function calculateDays(dateString) {
     } else {
         daysLeftEl.textContent = 'Срок истёк!';
     }
-
-    // Проверки остатка дней, выводящие текст снизу
+}
+// Удаление старых классов и вся цепочка выбора сообщения
+function renderStatusMessage(diffDays) {
     calcMessage.classList.remove('calc-msg-info',
         'calc-msg-warning',
         'calc-msg-danger'
@@ -111,6 +91,34 @@ function calculateDays(dateString) {
         calcMessage.textContent = 'Срок пребывания по штампу превышен! Срочно нужен выезд.';
         calcMessage.classList.add('calc-msg-danger');
     }
+}
+
+function calculateDays(dateString) {
+    if (!dateString) {
+        calcResult.classList.add('hidden');
+        return;
+    }
+
+    const entryDate = parseEntryDate(dateString);
+
+    // Рассчитываем дату выезда
+    const deadlineDate = getDeadlineDate(entryDate);
+
+    // Получаем сегодняшнюю дату
+    const today = new Date();
+
+    // Подготавливаем обе даты для сравнения
+    const todayTimestamp = getCalendarTimestamp(today);
+
+    const deadlineTimestamp = getCalendarTimestamp(deadlineDate);
+
+    // Разница в полных днях
+    const diffTime = deadlineTimestamp - todayTimestamp;
+    const diffDays = Math.round(diffTime / MILLISECONDS_PER_DAY);
+
+    renderDeadlineDate(deadlineDate);
+    renderDaysLeft(diffDays);
+    renderStatusMessage(diffDays);
 
     calcResult.classList.remove('hidden');
 }
