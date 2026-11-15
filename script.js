@@ -21,7 +21,6 @@ entryDateInput.addEventListener('focus', () => {
 
 entryDateInput.addEventListener('change', () => {
     const todayStr = formatDateForInput(new Date());
-    entryDateInput.max = todayStr;
 
     entryDateHint.textContent = '';
     if (!entryDateInput.value) {
@@ -118,7 +117,6 @@ function calculateDays(dateString) {
         calcResult.classList.add('hidden');
         return;
     }
-
 
     const entryDate = parseEntryDate(dateString);
 
