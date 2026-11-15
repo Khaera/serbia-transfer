@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
     const entryDateInput = document.getElementById('entryDate');
     const calcResult = document.getElementById('calcResult');
     const deadlineDateEl = document.getElementById('deadlineDate');
@@ -49,33 +48,32 @@ document.addEventListener('DOMContentLoaded', () => {
             daysLeftEl.textContent = 'Срок истёк!';
         }
 
-        // Твои проверки с сообщениями
+        // Проверки остатка дней, выводящие текст снизу
+        calcMessage.classList.remove('calc-msg-info', 
+            'calc-msg-warning', 
+            'calc-msg-danger'
+        );
+
         if (diffDays > 5) {
             calcMessage.textContent = 'Всё под контролем, время до выезда есть.';
-            calcMessage.style.color = '#2563eb';
-            calcMessage.style.backgroundColor = '#eff6ff';
+            calcMessage.classList.add('calc-msg-info');
         } 
-        else if (diffDays > 1 && diffDays <= 5) {
+        else if (diffDays > 1) {
             calcMessage.textContent = 'Внимание! Скоро пора планировать визаран!';
-            calcMessage.style.color = '#d97706';
-            calcMessage.style.backgroundColor = '#fef3c7';
+            calcMessage.classList.add('calc-msg-warning');
         }
         else if (diffDays === 1) {
             calcMessage.textContent = 'Завтра последний день! Срочно на визаран!';
-            calcMessage.style.color = 'rgb(250, 21, 21)';
-            calcMessage.style.backgroundColor = '#fee2e2';
+            calcMessage.classList.add('calc-msg-danger');
         }
         else if (diffDays === 0) {
             calcMessage.textContent = 'Выехать нужно СЕГОДНЯ!';
-            calcMessage.style.color = 'rgb(250, 21, 21)';
-            calcMessage.style.backgroundColor = '#fee2e2';
+            calcMessage.classList.add('calc-msg-danger');
         }
         else {
             calcMessage.textContent = 'Срок пребывания по штампу превышен! Срочно нужен выезд.';
-            calcMessage.style.color = '#f87171';
-            calcMessage.style.backgroundColor = '#fee2e2';
+            calcMessage.classList.add('calc-msg-danger');
         }
 
         calcResult.classList.remove('hidden');
     }
-});

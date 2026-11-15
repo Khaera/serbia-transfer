@@ -294,6 +294,21 @@ body {
     border: 1px solid #dbeafe;
 }
 
+.calc-msg-info {
+    color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.calc-msg-warning {
+    color: #d97706;
+    background-color: #fef3c7;
+}
+
+.calc-msg-danger {
+    color: rgb(250, 21, 21);
+    background-color: #fee2e2;
+}
+
 .hidden {
     display: none;
 }
