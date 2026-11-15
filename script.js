@@ -32,9 +32,10 @@ function parseEntryDate(dateString) {
     return entryDate;
 }
 
+//день вьезда считается уже первым днем, поэтому из константы вычитаем 1
 function getDeadlineDate(entryDate) {
     const deadlineDate = new Date(entryDate);
-    deadlineDate.setDate(entryDate.getDate() + STAY_DURATION_DAYS);
+    deadlineDate.setDate(entryDate.getDate() + STAY_DURATION_DAYS - 1);
     return deadlineDate;
 }
 
