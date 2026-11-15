@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визаран из Крагуевца</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Свои стили и скрипт -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <span>Визаран и поездки по Сербии</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#services">Услуги</a>
+                <a href="#about">Обо мне</a>
+                <a href="#calculator">Калькулятор</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <a href="https://t.me/no0_way" target="_blank" class="btn-primary-small">
+                <i class="fa-brands fa-telegram"></i> Написать
+            </a>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <div class="badge">
+                    <i class="fa-solid fa-location-dot"></i> Живу в Крагуевце
+                </div>
+                <h1>Частный сервис поездок и визаранов</h1>
+                <p>Привет! Помогаю соотечественникам с визаранами в Боснию из Крагуеваца и Белграда, трансферами из аэропорта и доставкой вещей из IKEA.</p>
+                <div class="hero-buttons">
+                    <a href="https://t.me/no0_way" target="_blank" class="btn btn-tg">
+                        <i class="fa-brands fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/381653455924" target="_blank" class="btn btn-wa">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div>
+                        <h3>Надёжно и без посредников</h3>
+                        <p>Напрямую с водителем</p>
+                    </div>
+                </div>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Пунктуальность и помощь с багажом</li>
+                    <li><i class="fa-solid fa-check"></i> Чистый и комфортный салон</li>
+                    <li><i class="fa-solid fa-check"></i> Подскажу по прохождению границы</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок Услуг -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="services-title">Услуги и направления</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="service-card-icon fa-solid fa-passport"></i>
+                    <h3 class="service-card-title">Визаран в Боснию</h3>
+                    <p class="service-card-description">Поездки из Крагуеваца или Белграда. Помощь на границе, быстрый возврат в тот же день.</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-card-icon fa-solid fa-plane-arrival"></i>
+                    <h3 class="service-card-title">Трансфер из аэропорта</h3>
+                    <p class="service-card-description">Встреча в Белграде в любой час и поездка в Крагуевац или любой другой город Сербии.</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-card-icon fa-solid fa-truck-ramp-box"></i>
+                    <h3 class="service-card-title">Доставка из IKEA</h3>
+                    <p class="service-card-description">Выкуп и аккуратная доставка покупок из IKEA прямо до вашей двери.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок Обо мне -->
+    <section id="about" class="about-section">
+        <div class="container about-container">
+            <h2 class="about-title">Обо мне</h2>
+            <p class="about-text about-text-spaced">
+                Я живу в Крагуевце и прекрасно знаю особенности местных дорог и маршрутов до границы. Организую индивидуальные поездки без толпы и задержек, чтобы всё прошло быстро, безопасно и без нервов.
+            </p>
+            <p class="about-text">
+                Цены фиксируются до выезда, без скрытых доплат. Всегда рад помочь не только с дорогой, но и с ответами на бытовые вопросы.
+            </p>
+        </div>
+    </section>
+
+    <!-- Калькулятор -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <h2>Калькулятор визарана (30 дней)</h2>
+            <p class="section-desc">Выберите дату въезда в Сербию по штампу:</p>
+            
+            <div class="calc-box">
+                <div class="input-group">
+                    <label for="entryDate">Дата въезда:</label>
+                    <input type="date" id="entryDate">
+                </div>
+                
+                <div id="calcResult" class="calc-result hidden">
+                    <div class="result-row">
+                        <span>Крайний срок выезда:</span>
+                        <strong id="deadlineDate">-</strong>
+                    </div>
+                    <div class="result-row">
+                        <span>Осталось дней:</span>
+                        <strong id="daysLeft">-</strong>
+                    </div>
+                    <p id="calcMessage" class="calc-msg"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок FAQ -->
+    <section id="faq" class="faq-section">
+        <div class="container faq-container">
+            <h2 class="faq-title">Часто задаваемые вопросы (FAQ)</h2>
+            <div class="faq-list">
+                <div class="faq-card">
+                    <h4 class="faq-question">Нужен ли Белый Картон на границе?</h4>
+                    <p class="faq-answer">Пограничники проверяют его не всегда, но лучше иметь при себе бумажный вариант или фото в телефоне. После въезда необходимо сделать новый в течение 24 часов.</p>
+                </div>
+                <div class="faq-card">
+                    <h4 class="faq-question">Сколько времени нужно быть за границей?</h4>
+                    <p class="faq-answer">Минимальных требований по часам нет: достаточен сам факт выезда из Сербии и проставления печатей сопредельного государства (например, Боснии).</p>
+                </div>
+                <div class="faq-card">
+                    <h4 class="faq-question">Как происходит бронирование поездки?</h4>
+                    <p class="faq-answer">Просто пишите в Telegram или WhatsApp. Мы согласовываем дату, удобное время выезда и адрес, откуда вас забрать.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="footer-copyright">© 2026 Антон Григораш. Разработка и дизайн.</p>
+            <a href="#" class="footer-link"><i class="fa-solid fa-arrow-up"></i> Наверх</a>
+        </div>
+    </footer>
+
+</body>
+</html>
