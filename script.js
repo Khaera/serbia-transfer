@@ -9,18 +9,20 @@ const calcMessage = document.getElementById('calcMessage');
 const entryDateHint = document.getElementById('entryDateHint');
 
 // Установим сегодняшнюю дату по умолчанию в инпут
-const currentDate = new Date();
-const year = currentDate.getFullYear();
-const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-const day = String(currentDate.getDate()).padStart(2, '0');
-
-const todayStr = `${year}-${month}-${day}`;
+const todayStr = formatDateForInput(new Date());
 
 entryDateInput.value = todayStr;
 entryDateInput.max = todayStr;
 calculateDays(entryDateInput.value);
 
+entryDateInput.addEventListener('focus', () => {
+    entryDateInput.max = formatDateForInput(new Date());
+});
+
 entryDateInput.addEventListener('change', () => {
+    const todayStr = formatDateForInput(new Date());
+    entryDateInput.max = todayStr;
+
     entryDateHint.textContent = '';
     if (!entryDateInput.value) {
         entryDateHint.textContent = 'Необходимо указать дату въезда в Сербию.';
@@ -102,6 +104,13 @@ function renderStatusMessage(diffDays) {
         calcMessage.textContent = 'Срок пребывания по штампу превышен! Срочно нужен выезд.';
         calcMessage.classList.add('calc-msg-danger');
     }
+}
+
+function formatDateForInput(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 function calculateDays(dateString) {
