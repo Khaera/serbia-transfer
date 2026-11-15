@@ -89,6 +89,7 @@ body {
 /* Главный экран */
 .hero {
     padding: 60px 0;
+    background-color: #eef2f7;
 }
 
 .hero-grid {
@@ -117,10 +118,6 @@ body {
     line-height: 1.2;
     margin-bottom: 20px;
     color: #0f172a;
-}
-
-.hero-text h1 span {
-    color: #2563eb;
 }
 
 .hero-text p {
@@ -289,6 +286,7 @@ body {
 }
 
 .calc-msg {
+    text-align: center;
     margin-top: 15px;
     font-size: 0.9rem;
     padding: 12px;
@@ -327,12 +325,12 @@ body {
 
 @media (max-width: 850px) {
     .hero-grid {
-        grid-template-columns: 1fr !important;
-        gap: 30px !important;
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
     
     .hero-text h1 {
-        font-size: 2.2rem !important;
+        font-size: 2.2rem;
     }
 }
 
@@ -379,7 +377,7 @@ body {
 
 .about-section {
     padding: 50px 0; 
-    background-color: #f8fafc; 
+    background-color: #eef2f7;
     border-top: 1px solid #e2e8f0; 
     border-bottom: 1px solid #e2e8f0;
 }
@@ -480,8 +478,15 @@ body {
     }
     
     .hero-text h1 {
-        font-size: 1.8rem !important;
+        font-size: 1.8rem;
     }
+
+    .result-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+}
 }
 
 html, body {
@@ -499,44 +504,38 @@ img, video, iframe, div, section {
 @media (max-width: 768px) {
     /* Выравниваем текст и контент всех секций по центру */
     body, section, .hero-text, .about-section, .calculator-section, #faq, #services {
-        text-align: center !important;
+        text-align: center;
     }
 
     .nav-container {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        gap: 12px !important;
-        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 12px;
+        width: 100%;
     }
 
     /* Логотип по центру */
     .logo {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        margin: 0 auto !important;
-        text-align: center !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
     }
 
     /* Навигационные ссылки в ряд или аккуратным блоком по центру */
     .nav-links {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        flex-wrap: wrap !important;
-        gap: 12px 18px !important;
-        margin: 0 auto !important;
-        padding: 0 !important;
-        list-style: none !important;
-    }
-
-    /* Кнопка «Написать» по центру */
-    header .btn, header a.btn {
-        margin: 0 auto !important;
-        display: inline-flex !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
     }
 
     /* Центрируем блоки кнопок (Telegram / WhatsApp) */
@@ -569,27 +568,22 @@ img, video, iframe, div, section {
 }
 
 @media (max-width: 768px) {
-    .hero-card, 
-    .hero-grid > div:last-child {
-        text-align: center !important;
+    .hero-card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     /* Выравниваем элементы списка с галочками по центру */
     .hero-card ul, 
     .hero-card div {
-        text-align: center !important;
-        justify-content: center !important;
+        text-align: center;
+        justify-content: center;
     }
 
     .hero-card li {
         text-align: left;
         justify-content: flex-start;
-    }
-
-    /* Если иконка или заголовок внутри карточки имеют флекс-структуру */
-    .hero-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 }
