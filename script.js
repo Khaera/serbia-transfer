@@ -42,18 +42,18 @@
         // Получаем сегодняшнюю дату
         const today = new Date();
 
-        // Подготавливаем обе даты для сравнения
-        const todayTimestamp = Date.UTC(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate()
-        );
+        //Создаем функцию которая возвращает метку полуночи UTC в миллисекундах
+        function getCalendarTimestamp(date) {
+            return Date.UTC(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+        )};
 
-        const deadlineTimestamp = Date.UTC(
-            deadlineDate.getFullYear(),
-            deadlineDate.getMonth(),
-            deadlineDate.getDate()
-        );
+        // Подготавливаем обе даты для сравнения
+        const todayTimestamp = getCalendarTimestamp(today);
+
+        const deadlineTimestamp = getCalendarTimestamp(deadlineDate);
 
         // Разница в полных днях
         const diffTime = deadlineTimestamp - todayTimestamp;
