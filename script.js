@@ -22,7 +22,9 @@ calculateDays(entryDateInput.value);
 
 entryDateInput.addEventListener('change', () => {
     entryDateHint.textContent = '';
-    if (entryDateInput.validity.rangeOverflow) {
+    if (!entryDateInput.value) {
+        entryDateHint.textContent = 'Необходимо указать дату въезда в Сербию.';
+    } else if (entryDateInput.validity.rangeOverflow) {
         entryDateInput.value = todayStr;
         entryDateHint.textContent = 'Дата въезда не может быть в будущем. Установлена сегодняшняя дата.';
     }
