@@ -22,18 +22,23 @@
         calculateDays(e.target.value);
     });
 
+    function parseEntryDate(dateString) {
+            const dateParts = dateString.split('-');
+            const entryYear = Number(dateParts[0]);
+            const entryMonth = Number(dateParts[1]);
+            const entryDay = Number(dateParts[2]);
+
+            const entryDate = new Date(entryYear, entryMonth - 1, entryDay);
+            return entryDate;
+        }
+
     function calculateDays(dateString) {
         if (!dateString) {
             calcResult.classList.add('hidden');
             return;
         }
 
-        const dateParts = dateString.split('-');
-        const entryYear = Number(dateParts[0]);
-        const entryMonth = Number(dateParts[1]);
-        const entryDay = Number(dateParts[2]);
-
-        const entryDate = new Date(entryYear, entryMonth - 1, entryDay);
+        const entryDate = parseEntryDate(dateString);
         
         // Рассчитываем дату выезда
         const deadlineDate = new Date(entryDate);
