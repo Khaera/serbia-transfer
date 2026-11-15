@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function calculateDays(dateString) {
-        if (!dateString) return;
+        if (!dateString) {
+            calcResult.classList.add('hidden');
+            return;
+        }
 
         const entryDate = new Date(dateString);
         
