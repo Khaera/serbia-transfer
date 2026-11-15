@@ -6,6 +6,7 @@ const calcResult = document.getElementById('calcResult');
 const deadlineDateEl = document.getElementById('deadlineDate');
 const daysLeftEl = document.getElementById('daysLeft');
 const calcMessage = document.getElementById('calcMessage');
+const entryDateHint = document.getElementById('entryDateHint');
 
 // Установим сегодняшнюю дату по умолчанию в инпут
 const currentDate = new Date();
@@ -20,8 +21,10 @@ entryDateInput.max = todayStr;
 calculateDays(entryDateInput.value);
 
 entryDateInput.addEventListener('change', () => {
+    entryDateHint.textContent = '';
     if (entryDateInput.validity.rangeOverflow) {
         entryDateInput.value = todayStr;
+        entryDateHint.textContent = 'Дата въезда не может быть в будущем. Установлена сегодняшняя дата.';
     }
 
     calculateDays(entryDateInput.value);

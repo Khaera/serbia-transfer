@@ -309,6 +309,15 @@ body {
     background-color: #fee2e2;
 }
 
+.input-hint {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.input-hint:empty {
+    display: none;
+}
+
 .hidden {
     display: none;
 }
