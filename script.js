@@ -16,10 +16,15 @@ const day = String(currentDate.getDate()).padStart(2, '0');
 const todayStr = `${year}-${month}-${day}`;
 
 entryDateInput.value = todayStr;
-calculateDays(todayStr);
+entryDateInput.max = todayStr;
+calculateDays(entryDateInput.value);
 
-entryDateInput.addEventListener('change', (e) => {
-    calculateDays(e.target.value);
+entryDateInput.addEventListener('change', () => {
+    if (entryDateInput.validity.rangeOverflow) {
+        entryDateInput.value = todayStr;
+    }
+
+    calculateDays(entryDateInput.value);
 });
 
 function parseEntryDate(dateString) {
@@ -99,6 +104,7 @@ function calculateDays(dateString) {
         calcResult.classList.add('hidden');
         return;
     }
+
 
     const entryDate = parseEntryDate(dateString);
 
