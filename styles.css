@@ -225,7 +225,8 @@ body {
 
 .section-desc {
     color: #64748b;
-    margin-bottom: 30px;
+    max-width: 700px;
+    margin: 0 auto 30px;
 }
 
 .calc-box {
