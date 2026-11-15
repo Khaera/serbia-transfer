@@ -24,6 +24,7 @@ body {
 .container {
     max-width: 1150px;
     margin: 0 auto;
+    padding: 0 15px;
 }
 
 /* Шапка */
@@ -204,8 +205,10 @@ body {
 }
 
 .feature-list i {
+    flex-shrink: 0;
     color: #2563eb;
     margin-top: 4px;
+    
 }
 
 /* Секция калькулятора */
@@ -470,10 +473,6 @@ body {
 
 /* Исправляем отступы контейнера на узких экранах, чтобы текст не прилипал к краям */
 @media (max-width: 600px) {
-    .container {
-        padding: 0 15px !important;
-    }
-
     .footer-container {
         flex-direction: column;
         align-items: center;
@@ -576,10 +575,14 @@ img, video, iframe, div, section {
 
     /* Выравниваем элементы списка с галочками по центру */
     .hero-card ul, 
-    .hero-card li,
     .hero-card div {
         text-align: center !important;
         justify-content: center !important;
+    }
+
+    .hero-card li {
+        text-align: left;
+        justify-content: flex-start;
     }
 
     /* Если иконка или заголовок внутри карточки имеют флекс-структуру */
