@@ -1,3 +1,6 @@
+    const STAY_DURATION_DAYS = 30;
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+
     const entryDateInput = document.getElementById('entryDate');
     const calcResult = document.getElementById('calcResult');
     const deadlineDateEl = document.getElementById('deadlineDate');
@@ -34,7 +37,7 @@
         
         // Рассчитываем дату выезда
         const deadlineDate = new Date(entryDate);
-        deadlineDate.setDate(entryDate.getDate() + 30);
+        deadlineDate.setDate(entryDate.getDate() + STAY_DURATION_DAYS);
 
         // Получаем сегодняшнюю дату
         const today = new Date();
@@ -54,7 +57,7 @@
 
         // Разница в полных днях
         const diffTime = deadlineTimestamp - todayTimestamp;
-        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+        const diffDays = Math.round(diffTime / MILLISECONDS_PER_DAY);
 
         // Форматируем дату дедлайна для красоты
         const options = { day: 'numeric', month: 'long', year: 'numeric' };
