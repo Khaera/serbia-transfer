@@ -5,7 +5,13 @@
     const calcMessage = document.getElementById('calcMessage');
 
     // Установим сегодняшнюю дату по умолчанию в инпут
-    const todayStr = new Date().toISOString().split('T')[0];
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    const todayStr = `${year}-${month}-${day}`;
+
     entryDateInput.value = todayStr;
     calculateDays(todayStr);
 
@@ -19,7 +25,12 @@
             return;
         }
 
-        const entryDate = new Date(dateString);
+        const dateParts = dateString.split('-');
+        const entryYear = Number(dateParts[0]);
+        const entryMonth = Number(dateParts[1]);
+        const entryDay = Number(dateParts[2]);
+
+        const entryDate = new Date(entryYear, entryMonth - 1, entryDay);
         
         // Крайний срок — ровно 30 дней после въезда
         const deadlineDate = new Date(entryDate);
