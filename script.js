@@ -8,12 +8,20 @@ const daysLeftEl = document.getElementById('daysLeft');
 const calcMessage = document.getElementById('calcMessage');
 const entryDateHint = document.getElementById('entryDateHint');
 
+const clearDateButton = document.getElementById('clearDate');
+
 // Установим сегодняшнюю дату по умолчанию в инпут
 const todayStr = formatDateForInput(new Date());
 
 entryDateInput.value = todayStr;
 entryDateInput.max = todayStr;
 calculateDays(entryDateInput.value);
+
+clearDateButton.addEventListener('click', () => {
+    entryDateInput.value = '';
+    calcResult.classList.add('hidden');
+    entryDateHint.textContent = 'Укажите дату въезда в Сербию';
+});
 
 entryDateInput.addEventListener('focus', () => {
     entryDateInput.max = formatDateForInput(new Date());

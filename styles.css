@@ -240,6 +240,30 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
 }
 
+.calc-button {
+    cursor: pointer;
+    padding: 12px;
+    font-size: 0.9rem;
+    background-color: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.calc-button:hover {
+    background-color: #dbeafe;
+}
+
+.calc-button:active {
+    background-color: #bfdbfe;
+}
+
+.calc-button:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 3px;
+}
+
 .input-group {
     display: flex;
     flex-direction: column;
