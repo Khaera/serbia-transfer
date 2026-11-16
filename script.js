@@ -47,11 +47,7 @@ entryDateInput.addEventListener('change', () => {
 });
 
 function updateClearButtonState() {
-    if (entryDateInput.value === '' && !entryDateInput.validity.badInput) {
-        clearDateButton.disabled = true;
-    } else {
-        clearDateButton.disabled = false;
-    }
+    clearDateButton.disabled = entryDateInput.value === '' && !entryDateInput.validity.badInput;
 }
 
 function parseEntryDate(dateString) {
