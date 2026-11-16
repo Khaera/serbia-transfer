@@ -251,17 +251,22 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.calc-button:hover {
+.calc-button:hover:enabled {
     background-color: #dbeafe;
 }
 
-.calc-button:active {
+.calc-button:active:enabled {
     background-color: #bfdbfe;
 }
 
 .calc-button:focus-visible {
     outline: 2px solid #2563eb;
     outline-offset: 3px;
+}
+
+.calc-button:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 .input-group {

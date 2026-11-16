@@ -21,7 +21,12 @@ clearDateButton.addEventListener('click', () => {
     entryDateInput.value = '';
     calcResult.classList.add('hidden');
     entryDateHint.textContent = 'Укажите дату въезда в Сербию';
+    updateClearButtonState();
 });
+
+entryDateInput.addEventListener('input', updateClearButtonState);
+
+entryDateInput.addEventListener('keyup', updateClearButtonState);
 
 entryDateInput.addEventListener('focus', () => {
     entryDateInput.max = formatDateForInput(new Date());
@@ -37,9 +42,17 @@ entryDateInput.addEventListener('change', () => {
         entryDateInput.value = todayStr;
         entryDateHint.textContent = 'Дата въезда не может быть в будущем. Установлена сегодняшняя дата.';
     }
-
     calculateDays(entryDateInput.value);
+    updateClearButtonState();
 });
+
+function updateClearButtonState() {
+    if (entryDateInput.value === '' && !entryDateInput.validity.badInput) {
+        clearDateButton.disabled = true;
+    } else {
+        clearDateButton.disabled = false;
+    }
+}
 
 function parseEntryDate(dateString) {
     const dateParts = dateString.split('-');
