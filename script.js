@@ -96,11 +96,25 @@ function getCalendarTimestamp(date) {
 };
 
 // Форматируем дату дедлайна для красоты
-function renderDeadlineDate(deadlineDate) {
+function renderDeadlineDate(deadlineDate, locale='ru-RU') {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDeadline = deadlineDate.toLocaleDateString('ru-RU', options);
+
+    const formattedDeadline = deadlineDate.toLocaleDateString(locale, options);
 
     deadlineDateEl.textContent = formattedDeadline;
+}
+
+function getDaysLeft(deadlineDate, today = new Date()) {
+    const todayTimestamp = getCalendarTimestamp(today);
+
+    const deadlineTimestamp = getCalendarTimestamp(deadlineDate);
+
+    // Разница в полных днях
+    const diffTime = deadlineTimestamp - todayTimestamp;
+
+    const diffDays = Math.round(diffTime / MILLISECONDS_PER_DAY);
+
+    return diffDays;
 }
 
 function renderDaysLeft(diffDays) {
@@ -159,17 +173,7 @@ function calculateDays(dateString) {
     // Рассчитываем дату выезда
     const deadlineDate = getDeadlineDate(entryDate);
 
-    // Получаем сегодняшнюю дату
-    const today = new Date();
-
-    // Подготавливаем обе даты для сравнения
-    const todayTimestamp = getCalendarTimestamp(today);
-
-    const deadlineTimestamp = getCalendarTimestamp(deadlineDate);
-
-    // Разница в полных днях
-    const diffTime = deadlineTimestamp - todayTimestamp;
-    const diffDays = Math.round(diffTime / MILLISECONDS_PER_DAY);
+    const diffDays = getDaysLeft(deadlineDate);
 
     renderDeadlineDate(deadlineDate);
     renderDaysLeft(diffDays);
