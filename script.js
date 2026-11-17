@@ -126,6 +126,40 @@ function renderDaysLeft(diffDays) {
         daysLeftEl.textContent = 'Срок истёк!';
     }
 }
+
+function getStatusInfo(daysLeft) {
+    if (daysLeft > 5) {
+        return {
+            message: 'Всё под контролем, время до выезда есть.',
+            className: 'calc-msg-info'
+        };
+    }
+    else if (daysLeft > 1) {
+        return {
+            message: 'Внимание! Скоро пора планировать визаран!',
+            className: 'calc-msg-warning'
+        };
+    }
+    else if (daysLeft === 1) {
+        return {
+            message: 'Завтра последний день! Срочно на визаран!',
+            className: 'calc-msg-danger'
+        };
+    }
+    else if (daysLeft === 0) {
+        return {
+            message: 'Выехать нужно СЕГОДНЯ!',
+            className: 'calc-msg-danger'
+        };
+    }
+    else {
+        return {
+            message: 'Срок пребывания по штампу превышен! Срочно нужен выезд.',
+            className: 'calc-msg-danger'
+        };
+    }
+}
+
 // Удаление старых классов и вся цепочка выбора сообщения
 function renderStatusMessage(diffDays) {
     calcMessage.classList.remove('calc-msg-info',
@@ -133,26 +167,10 @@ function renderStatusMessage(diffDays) {
         'calc-msg-danger'
     );
 
-    if (diffDays > 5) {
-        calcMessage.textContent = 'Всё под контролем, время до выезда есть.';
-        calcMessage.classList.add('calc-msg-info');
-    }
-    else if (diffDays > 1) {
-        calcMessage.textContent = 'Внимание! Скоро пора планировать визаран!';
-        calcMessage.classList.add('calc-msg-warning');
-    }
-    else if (diffDays === 1) {
-        calcMessage.textContent = 'Завтра последний день! Срочно на визаран!';
-        calcMessage.classList.add('calc-msg-danger');
-    }
-    else if (diffDays === 0) {
-        calcMessage.textContent = 'Выехать нужно СЕГОДНЯ!';
-        calcMessage.classList.add('calc-msg-danger');
-    }
-    else {
-        calcMessage.textContent = 'Срок пребывания по штампу превышен! Срочно нужен выезд.';
-        calcMessage.classList.add('calc-msg-danger');
-    }
+    const status = getStatusInfo(diffDays);
+
+    calcMessage.textContent = status.message;
+    calcMessage.classList.add(status.className);
 }
 
 function formatDateForInput(date) {
