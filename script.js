@@ -9,7 +9,8 @@ const calcMessage = document.getElementById('calcMessage');
 const entryDateHint = document.getElementById('entryDateHint');
 
 const clearDateButton = document.getElementById('clearDate');
-const tgButton = document.getElementById('tg-button');
+const tgButton = document.getElementById('tgButton');
+const todayButton = document.getElementById('setTodayDate');
 
 const savedEntryDate = localStorage.getItem('entryDate');
 
@@ -31,6 +32,7 @@ if (entryDateInput.value === '' || entryDateInput.validity.rangeOverflow) {
 
 calculateDays(entryDateInput.value);
 updateClearButtonState();
+updateSetTodayState();
 
 clearDateButton.addEventListener('click', () => {
     entryDateInput.value = '';
@@ -38,19 +40,32 @@ clearDateButton.addEventListener('click', () => {
     entryDateHint.textContent = 'Укажите дату въезда в Сербию';
     localStorage.removeItem('entryDate');
     tgButton.classList.add('hidden');
+    updateSetTodayState();
     updateClearButtonState();
 });
 
-entryDateInput.addEventListener('input', updateClearButtonState);
+todayButton.addEventListener('click', () => {
+    setTodayDate();
+    localStorage.setItem('entryDate', entryDateInput.value);
+});
 
-entryDateInput.addEventListener('keyup', updateClearButtonState);
+entryDateInput.addEventListener('input', () => {
+    updateClearButtonState(); 
+    updateSetTodayState();
+});
+
+entryDateInput.addEventListener('keyup', () => {
+    updateClearButtonState(); 
+    updateSetTodayState();
+});
 
 entryDateInput.addEventListener('focus', () => {
     entryDateInput.max = formatDateForInput(new Date());
 });
 
 entryDateInput.addEventListener('change', () => {
-    const todayStr = formatDateForInput(new Date());
+    updateClearButtonState();
+    updateSetTodayState();
 
     entryDateHint.textContent = '';
     if (!entryDateInput.value) {
@@ -58,18 +73,33 @@ entryDateInput.addEventListener('change', () => {
         entryDateHint.textContent = 'Необходимо указать дату въезда в Сербию.';
         tgButton.classList.add('hidden');
     } else if (entryDateInput.validity.rangeOverflow) {
-        entryDateInput.value = todayStr;
-        entryDateHint.textContent = 'Дата въезда не может быть в будущем. Установлена сегодняшняя дата.';
+        calcResult.classList.add('hidden');
+        entryDateHint.textContent = 'Дата въезда не может быть в будущем.';
+        tgButton.classList.add('hidden');
+        return;
     } else {
         localStorage.setItem('entryDate', entryDateInput.value);
     }
-
+    
     calculateDays(entryDateInput.value);
-    updateClearButtonState();
 });
 
+function setTodayDate() {
+    const todayDate = formatDateForInput(new Date());
+    entryDateInput.value = todayDate;
+    entryDateHint.textContent = '';
+    calculateDays(todayDate);
+    updateSetTodayState();
+    updateClearButtonState();
+}
+
+function updateSetTodayState() {
+    const todayDate = formatDateForInput(new Date());
+    todayButton.classList.toggle('hidden', entryDateInput.value === todayDate);
+}
+
 function updateClearButtonState() {
-    clearDateButton.disabled = entryDateInput.value === '' && !entryDateInput.validity.badInput;
+    clearDateButton.classList.toggle('hidden', entryDateInput.value === '' && !entryDateInput.validity.badInput);
 }
 
 function parseEntryDate(dateString) {

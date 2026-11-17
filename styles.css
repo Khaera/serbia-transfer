@@ -314,10 +314,6 @@ body {
     outline-offset: 3px;
 }
 
-.calc-button:disabled {
-    opacity: 0.5;
-    cursor: default;
-}
 
 .calc-msg {
     text-align: center;
