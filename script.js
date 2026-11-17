@@ -10,17 +10,32 @@ const entryDateHint = document.getElementById('entryDateHint');
 
 const clearDateButton = document.getElementById('clearDate');
 
-// Установим сегодняшнюю дату по умолчанию в инпут
+const savedEntryDate = localStorage.getItem('entryDate');
+
+// Восстанавливаем сохранённую дату или подставляем сегодняшнюю
 const todayStr = formatDateForInput(new Date());
 
-entryDateInput.value = todayStr;
 entryDateInput.max = todayStr;
+
+if (savedEntryDate) {
+    entryDateInput.value = savedEntryDate;
+} else {
+    entryDateInput.value = todayStr;
+}
+
+if (entryDateInput.value === '' || entryDateInput.validity.rangeOverflow) {
+    localStorage.removeItem('entryDate');
+    entryDateInput.value = todayStr;
+}
+
 calculateDays(entryDateInput.value);
+updateClearButtonState();
 
 clearDateButton.addEventListener('click', () => {
     entryDateInput.value = '';
     calcResult.classList.add('hidden');
     entryDateHint.textContent = 'Укажите дату въезда в Сербию';
+    localStorage.removeItem('entryDate');
     updateClearButtonState();
 });
 
@@ -37,11 +52,15 @@ entryDateInput.addEventListener('change', () => {
 
     entryDateHint.textContent = '';
     if (!entryDateInput.value) {
+        localStorage.removeItem('entryDate');
         entryDateHint.textContent = 'Необходимо указать дату въезда в Сербию.';
     } else if (entryDateInput.validity.rangeOverflow) {
         entryDateInput.value = todayStr;
         entryDateHint.textContent = 'Дата въезда не может быть в будущем. Установлена сегодняшняя дата.';
+    } else {
+        localStorage.setItem('entryDate', entryDateInput.value);
     }
+
     calculateDays(entryDateInput.value);
     updateClearButtonState();
 });
