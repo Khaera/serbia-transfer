@@ -131,31 +131,36 @@ function getStatusInfo(daysLeft) {
     if (daysLeft > 5) {
         return {
             message: 'Всё под контролем, время до выезда есть.',
-            className: 'calc-msg-info'
+            className: 'calc-msg-info',
+            isUrgent: false,
         };
     }
     else if (daysLeft > 1) {
         return {
             message: 'Внимание! Скоро пора планировать визаран!',
-            className: 'calc-msg-warning'
+            className: 'calc-msg-warning',
+            isUrgent: false,
         };
     }
     else if (daysLeft === 1) {
         return {
             message: 'Завтра последний день! Срочно на визаран!',
-            className: 'calc-msg-danger'
+            className: 'calc-msg-danger',
+            isUrgent: true,
         };
     }
     else if (daysLeft === 0) {
         return {
             message: 'Выехать нужно СЕГОДНЯ!',
-            className: 'calc-msg-danger'
+            className: 'calc-msg-danger',
+            isUrgent: true,
         };
     }
     else {
         return {
             message: 'Срок пребывания по штампу превышен! Срочно нужен выезд.',
-            className: 'calc-msg-danger'
+            className: 'calc-msg-danger',
+            isUrgent: true,
         };
     }
 }
@@ -171,6 +176,8 @@ function renderStatusMessage(diffDays) {
 
     calcMessage.textContent = status.message;
     calcMessage.classList.add(status.className);
+    
+    calcMessage.classList.toggle('calc-msg-urgent', status.isUrgent);
 }
 
 function formatDateForInput(date) {
