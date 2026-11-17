@@ -86,6 +86,10 @@ body {
     background-color: #1d4ed8;
 }
 
+.btn-calc-tg {
+    text-align: center;
+}
+
 /* Главный экран */
 .hero {
     padding: 60px 0;

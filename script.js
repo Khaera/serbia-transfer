@@ -9,6 +9,7 @@ const calcMessage = document.getElementById('calcMessage');
 const entryDateHint = document.getElementById('entryDateHint');
 
 const clearDateButton = document.getElementById('clearDate');
+const tgButton = document.getElementById('tg-button');
 
 const savedEntryDate = localStorage.getItem('entryDate');
 
@@ -36,6 +37,7 @@ clearDateButton.addEventListener('click', () => {
     calcResult.classList.add('hidden');
     entryDateHint.textContent = 'Укажите дату въезда в Сербию';
     localStorage.removeItem('entryDate');
+    tgButton.classList.add('hidden');
     updateClearButtonState();
 });
 
@@ -54,6 +56,7 @@ entryDateInput.addEventListener('change', () => {
     if (!entryDateInput.value) {
         localStorage.removeItem('entryDate');
         entryDateHint.textContent = 'Необходимо указать дату въезда в Сербию.';
+        tgButton.classList.add('hidden');
     } else if (entryDateInput.validity.rangeOverflow) {
         entryDateInput.value = todayStr;
         entryDateHint.textContent = 'Дата въезда не может быть в будущем. Установлена сегодняшняя дата.';
@@ -178,6 +181,7 @@ function renderStatusMessage(diffDays) {
     calcMessage.classList.add(status.className);
     
     calcMessage.classList.toggle('calc-msg-urgent', status.isUrgent);
+    tgButton.classList.toggle('hidden', diffDays > 5);
 }
 
 function formatDateForInput(date) {
